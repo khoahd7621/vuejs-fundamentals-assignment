@@ -16,6 +16,7 @@ import { RouterLink } from 'vue-router'
                 </li>
                 <li><RouterLink to="/about">About Us</RouterLink></li>
                 <li><RouterLink to="/contact">Contact</RouterLink></li>
+                <li><RouterLink to="/cart">Cart</RouterLink></li>
               </ul>
             </nav>
           </div>

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { useRoute, RouterLink } from 'vue-router'
+import { useCartStore } from '@/stores/cart'
 
 type Product = {
   id: number
@@ -18,6 +19,7 @@ type Product = {
 const loading = ref(true)
 const product = ref<Product | null>(null)
 const error = ref(null)
+const cartStore = useCartStore()
 
 function fetchData() {
   loading.value = true
@@ -56,7 +58,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div v-if="!loading && product">
+  <div v-if="!loading && product !== null">
     <!-- Begin Li's Breadcrumb Area -->
     <div class="breadcrumb-area">
       <div class="container">
@@ -130,17 +132,14 @@ onMounted(() => {
                   </p>
                 </div>
                 <div class="single-add-to-cart">
-                  <form action="#" class="cart-quantity">
-                    <div class="quantity">
-                      <label>Quantity</label>
-                      <div class="cart-plus-minus">
-                        <input class="cart-plus-minus-box" value="1" type="text" />
-                        <div class="dec qtybutton"><i class="fa fa-angle-down"></i></div>
-                        <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
-                      </div>
-                    </div>
-                    <button class="add-to-cart" type="submit">Add to cart</button>
-                  </form>
+                  <div class="cart-quantity">
+                    <button
+                      class="add-to-cart"
+                      @click="() => cartStore.addToCart(product as Product, 1)"
+                    >
+                      Add to cart
+                    </button>
+                  </div>
                 </div>
                 <div class="product-additional-info pt-25">
                   <a class="wishlist-btn" href="#"><i class="fa fa-heart-o"></i>Add to wishlist</a>

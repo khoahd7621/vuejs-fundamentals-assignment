@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
+import { useCartStore } from '@/stores/cart'
+
 defineProps<{
   product: {
     id: number
@@ -14,6 +16,8 @@ defineProps<{
     }
   }
 }>()
+
+const cartStore = useCartStore()
 </script>
 
 <template>
@@ -56,7 +60,7 @@ defineProps<{
         <div class="add-actions">
           <ul class="add-actions-link">
             <li class="add-cart active">
-              <a href="#">Add to cart</a>
+              <a href="#" @click="() => cartStore.addToCart(product, 1)">Add to cart</a>
             </li>
             <li>
               <a

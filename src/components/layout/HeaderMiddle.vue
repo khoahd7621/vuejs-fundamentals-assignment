@@ -1,3 +1,10 @@
+<script setup lang="ts">
+import { RouterLink } from 'vue-router'
+import { useCartStore } from '@/stores/cart'
+
+const cartStore = useCartStore()
+</script>
+
 <template>
   <div class="header-middle pl-sm-0 pr-sm-0 pl-xs-0 pr-xs-0">
     <div class="container">
@@ -107,49 +114,50 @@
                 <div class="hm-minicart-trigger">
                   <span class="item-icon"></span>
                   <span class="item-text"
-                    >£80.00
-                    <span class="cart-item-count">2</span>
+                    >${{ cartStore.totalMoney }}
+                    <span class="cart-item-count">{{ cartStore.items.length }}</span>
                   </span>
                 </div>
                 <span></span>
-                <div class="minicart">
+                <div v-if="cartStore.items.length === 0" class="minicart">
+                  <span>Empty</span>
+                </div>
+                <div v-if="cartStore.items.length > 0" class="minicart">
                   <ul class="minicart-product-list">
-                    <li>
-                      <a href="single-product.html" class="minicart-product-image">
-                        <img src="images/product/small-size/5.jpg" alt="cart products" />
-                      </a>
+                    <li v-for="item in cartStore.items" :key="item.product.id">
+                      <RouterLink
+                        :to="`/product/${item.product.id}`"
+                        class="minicart-product-image"
+                      >
+                        <img :src="item.product.image" alt="cart products" />
+                      </RouterLink>
                       <div class="minicart-product-details">
-                        <h6><a href="single-product.html">Aenean eu tristique</a></h6>
-                        <span>£40 x 1</span>
+                        <h6>
+                          <RouterLink :to="`/product/${item.product.id}`"
+                            >Aenean eu tristique</RouterLink
+                          >
+                        </h6>
+                        <span>${{ item.product.price }} x {{ item.quantity }}</span>
                       </div>
-                      <button class="close" title="Remove">
-                        <i class="fa fa-close"></i>
-                      </button>
-                    </li>
-                    <li>
-                      <a href="single-product.html" class="minicart-product-image">
-                        <img src="images/product/small-size/6.jpg" alt="cart products" />
-                      </a>
-                      <div class="minicart-product-details">
-                        <h6><a href="single-product.html">Aenean eu tristique</a></h6>
-                        <span>£40 x 1</span>
-                      </div>
-                      <button class="close" title="Remove">
+                      <button
+                        class="close"
+                        title="Remove"
+                        @click="() => cartStore.removeItem(item.product)"
+                      >
                         <i class="fa fa-close"></i>
                       </button>
                     </li>
                   </ul>
-                  <p class="minicart-total">SUBTOTAL: <span>£80.00</span></p>
+                  <p class="minicart-total">
+                    SUBTOTAL: <span>${{ cartStore.totalMoney }}</span>
+                  </p>
                   <div class="minicart-button">
-                    <a
-                      href="shopping-cart.html"
-                      class="li-button li-button-fullwidth li-button-dark"
-                    >
+                    <RouterLink to="/cart" class="li-button li-button-fullwidth li-button-dark">
                       <span>View Full Cart</span>
-                    </a>
-                    <a href="checkout.html" class="li-button li-button-fullwidth">
+                    </RouterLink>
+                    <RouterLink to="/checkout" class="li-button li-button-fullwidth">
                       <span>Checkout</span>
-                    </a>
+                    </RouterLink>
                   </div>
                 </div>
               </li>
