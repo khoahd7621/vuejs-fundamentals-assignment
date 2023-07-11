@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
+import { useUserStore } from '@/stores/user'
+
+const userStore = useUserStore()
 </script>
 
 <template>
@@ -17,6 +20,15 @@ import { RouterLink } from 'vue-router'
                 <li><RouterLink to="/about">About Us</RouterLink></li>
                 <li><RouterLink to="/contact">Contact</RouterLink></li>
                 <li><RouterLink to="/cart">Cart</RouterLink></li>
+                <li v-if="!userStore.isAuthenticated">
+                  <RouterLink to="/login">Login</RouterLink>
+                </li>
+                <li v-if="!userStore.isAuthenticated">
+                  <RouterLink to="/register">Register</RouterLink>
+                </li>
+                <li v-if="userStore.isAuthenticated">
+                  <RouterLink to="/profile">Profile</RouterLink>
+                </li>
               </ul>
             </nav>
           </div>

@@ -1,3 +1,10 @@
+<script setup lang="ts">
+import { RouterLink } from 'vue-router'
+import { useUserStore } from '@/stores/user'
+
+const userStore = useUserStore()
+</script>
+
 <template>
   <div class="header-top">
     <div class="container">
@@ -20,9 +27,19 @@
                 <div class="ht-setting-trigger"><span>Setting</span></div>
                 <div class="setting ht-setting">
                   <ul class="ht-setting-list">
-                    <li><a href="login-register.html">My Account</a></li>
-                    <li><a href="checkout.html">Checkout</a></li>
-                    <li><a href="login-register.html">Sign In</a></li>
+                    <li v-if="userStore.isAuthenticated">
+                      <RouterLink to="/profile">My Account</RouterLink>
+                    </li>
+                    <li><RouterLink to="/checkout">Checkout</RouterLink></li>
+                    <li v-if="!userStore.isAuthenticated">
+                      <RouterLink to="/login">Sign In</RouterLink>
+                    </li>
+                    <li v-if="!userStore.isAuthenticated">
+                      <RouterLink to="/register">Sign Up</RouterLink>
+                    </li>
+                    <li v-if="userStore.isAuthenticated">
+                      <a href="#" @click="() => userStore.logout()">Logout</a>
+                    </li>
                   </ul>
                 </div>
               </li>
