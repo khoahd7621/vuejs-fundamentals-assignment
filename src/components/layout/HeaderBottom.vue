@@ -14,9 +14,6 @@ import { RouterLink } from 'vue-router'
                 <li>
                   <RouterLink to="/">Home</RouterLink>
                 </li>
-                <li>
-                  <RouterLink to="/shop">Shop</RouterLink>
-                </li>
                 <li><RouterLink to="/about">About Us</RouterLink></li>
                 <li><RouterLink to="/contact">Contact</RouterLink></li>
               </ul>
