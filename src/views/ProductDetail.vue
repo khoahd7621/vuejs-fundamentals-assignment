@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import { useRoute, RouterLink } from 'vue-router'
 import { useCartStore } from '@/stores/cart'
+import { onMounted, ref } from 'vue'
+import { RouterLink, useRoute } from 'vue-router'
 
 type Product = {
   id: number

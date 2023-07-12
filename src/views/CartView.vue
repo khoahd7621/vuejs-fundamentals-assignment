@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { RouterLink } from 'vue-router'
 import { useCartStore } from '@/stores/cart'
+import { RouterLink } from 'vue-router'
 
 const cartStore = useCartStore()
 </script>

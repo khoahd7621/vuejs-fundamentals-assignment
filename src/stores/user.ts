@@ -34,10 +34,13 @@ export const useUserStore = defineStore('user', () => {
     isAuthenticated.value = true
     token.value = tokens
   }
+  function updateUser(data: User) {
+    user.value = data
+  }
   function logout() {
     user.value = null
     isAuthenticated.value = false
   }
 
-  return { user, isAuthenticated, login, logout }
+  return { user, isAuthenticated, login, updateUser, logout }
 })

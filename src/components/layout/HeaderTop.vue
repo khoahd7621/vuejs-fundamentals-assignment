@@ -1,8 +1,10 @@
 <script setup lang="ts">
-import { RouterLink } from 'vue-router'
+import { useCartStore } from '@/stores/cart'
 import { useUserStore } from '@/stores/user'
+import { RouterLink } from 'vue-router'
 
 const userStore = useUserStore()
+const cartStore = useCartStore()
 </script>
 
 <template>
@@ -30,7 +32,9 @@ const userStore = useUserStore()
                     <li v-if="userStore.isAuthenticated">
                       <RouterLink to="/profile">My Account</RouterLink>
                     </li>
-                    <li><RouterLink to="/checkout">Checkout</RouterLink></li>
+                    <li v-if="cartStore.items.length > 0">
+                      <RouterLink to="/checkout">Checkout</RouterLink>
+                    </li>
                     <li v-if="!userStore.isAuthenticated">
                       <RouterLink to="/login">Sign In</RouterLink>
                     </li>
@@ -38,7 +42,16 @@ const userStore = useUserStore()
                       <RouterLink to="/register">Sign Up</RouterLink>
                     </li>
                     <li v-if="userStore.isAuthenticated">
-                      <a href="#" @click="() => userStore.logout()">Logout</a>
+                      <a
+                        href="#"
+                        @click="
+                          () => {
+                            userStore.logout()
+                            cartStore.clearCart()
+                          }
+                        "
+                        >Logout</a
+                      >
                     </li>
                   </ul>
                 </div>

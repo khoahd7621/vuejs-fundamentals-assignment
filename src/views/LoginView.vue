@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { RouterLink, useRouter } from 'vue-router'
-import { ref, watch } from 'vue'
 import { useUserStore } from '@/stores/user'
+import { onBeforeMount, ref, watch } from 'vue'
+import { RouterLink, useRouter } from 'vue-router'
 
 const router = useRouter()
 const userStore = useUserStore()
@@ -85,6 +85,12 @@ function fetchProfile(token: string) {
     })
 }
 
+onBeforeMount(() => {
+  if (userStore.isAuthenticated) {
+    router.push({ name: 'home' })
+  }
+})
+
 watch(useUserStore, () => {
   if (userStore.isAuthenticated) {
     router.push({ name: 'home' })
@@ -122,7 +128,7 @@ watch(useUserStore, () => {
                     type="text"
                     placeholder="Username"
                     v-model="username"
-                    :disabled="loading"
+                    :readonly="loading"
                   />
                 </div>
                 <div class="col-12 mb-20">
@@ -132,11 +138,8 @@ watch(useUserStore, () => {
                     type="password"
                     placeholder="Password"
                     v-model="password"
-                    :disabled="loading"
+                    :readonly="loading"
                   />
-                </div>
-                <div class="col-md-6 mb-20">
-                  <a href="#">Forgotten password?</a>
                 </div>
                 <div class="col-md-12">
                   <button class="register-button mt-0" :disabled="loading">Login</button>

@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { ref, onMounted, watch } from 'vue'
-import type { Ref } from 'vue'
-import VerticalProductCard from '@/components/VerticalProductCard.vue'
 import HorizontalProductCard from '@/components/HorizontalProductCard.vue'
+import VerticalProductCard from '@/components/VerticalProductCard.vue'
+import type { Ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 
 type Product = {
   id: number
