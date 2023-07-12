@@ -76,10 +76,10 @@ const cartStore = useCartStore()
                 <div class="language ht-language">
                   <ul class="ht-setting-list">
                     <li class="active">
-                      <a href="#"><img src="images/menu/flag-icon/1.jpg" alt="" />English</a>
+                      <a href="#"><img src="/images/menu/flag-icon/1.jpg" alt="" />English</a>
                     </li>
                     <li>
-                      <a href="#"><img src="images/menu/flag-icon/2.jpg" alt="" />Français</a>
+                      <a href="#"><img src="/images/menu/flag-icon/2.jpg" alt="" />Français</a>
                     </li>
                   </ul>
                 </div>

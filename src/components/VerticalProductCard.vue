@@ -25,7 +25,7 @@ const cartStore = useCartStore()
     <!-- single-product-wrap start -->
     <div class="single-product-wrap">
       <div class="product-image">
-        <RouterLink :to="`/product/${product.id}`">
+        <RouterLink :to="{ name: 'product', params: { id: product.id } }">
           <div :style="{ padding: '0 20px' }">
             <img :src="product.image" :alt="product.title" />
           </div>
@@ -36,7 +36,9 @@ const cartStore = useCartStore()
         <div class="product_desc_info">
           <div class="product-review">
             <h5 class="manufacturer">
-              <RouterLink :to="`/product/${product.id}`">{{ product.category }}</RouterLink>
+              <RouterLink :to="{ name: 'product', params: { id: product.id } }">{{
+                product.category
+              }}</RouterLink>
             </h5>
             <div class="rating-box">
               <ul class="rating">
@@ -49,9 +51,11 @@ const cartStore = useCartStore()
             </div>
           </div>
           <h4>
-            <RouterLink class="product_name" :to="`/product/${product.id}`">{{
-              product.title
-            }}</RouterLink>
+            <RouterLink
+              class="product_name"
+              :to="{ name: 'product', params: { id: product.id } }"
+              >{{ product.title }}</RouterLink
+            >
           </h4>
           <div class="price-box">
             <span class="new-price">${{ product.price }}</span>

@@ -13,7 +13,7 @@ const cartStore = useCartStore()
         <div class="col-lg-3">
           <div class="logo pb-sm-30 pb-xs-30">
             <RouterLink to="/">
-              <img src="images/menu/logo/1.jpg" alt="" />
+              <img src="/images/menu/logo/1.jpg" alt="" />
             </RouterLink>
           </div>
         </div>
@@ -126,14 +126,14 @@ const cartStore = useCartStore()
                   <ul class="minicart-product-list">
                     <li v-for="item in cartStore.items" :key="item.product.id">
                       <RouterLink
-                        :to="`/product/${item.product.id}`"
+                        :to="{ name: 'product', params: { id: item.product.id } }"
                         class="minicart-product-image"
                       >
                         <img :src="item.product.image" alt="cart products" />
                       </RouterLink>
                       <div class="minicart-product-details">
                         <h6>
-                          <RouterLink :to="`/product/${item.product.id}`"
+                          <RouterLink :to="{ name: 'product', params: { id: item.product.id } }"
                             >Aenean eu tristique</RouterLink
                           >
                         </h6>

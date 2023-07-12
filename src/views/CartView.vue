@@ -44,7 +44,7 @@ const cartStore = useCartStore()
                       ></a>
                     </td>
                     <td class="li-product-thumbnail">
-                      <RouterLink :to="`/product/${item.product.id}`"
+                      <RouterLink :to="{ name: 'product', params: { id: item.product.id } }"
                         ><img
                           :style="{ width: '50px' }"
                           :src="item.product.image"
@@ -52,7 +52,7 @@ const cartStore = useCartStore()
                       /></RouterLink>
                     </td>
                     <td class="li-product-name">
-                      <RouterLink :to="`/product/${item.product.id}`">{{
+                      <RouterLink :to="{ name: 'product', params: { id: item.product.id } }">{{
                         item.product.title
                       }}</RouterLink>
                     </td>
